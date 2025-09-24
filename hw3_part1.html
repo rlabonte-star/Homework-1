@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" description="JavaScript course at CSM">
+<title>JavaScript course at CSM</title>
+<link rel="stylesheet" href="hw1.css">
+</head>
+<body>
+  <h1>Homework 3 Part 1</h1>
+  <form id="gradesForm">
+    <label for="hwAvg">Homework Average:</label>
+    <input type="number" id="hwAvg" min="0" max="100">
+
+    <label for="midExam">Mid-Term Exam Score:</label>
+    <input type="number" id="midExam" min="0" max="100">
+
+    <label for="finalExam">Final Exam Score:</label>
+    <input type="number" id="finalExam" min="0" max="100">
+
+    <label for="participation">Participation:</label>
+    <input type="number" id="participation" min="0" max="100">
+
+    <button type="button" onclick="calculateGrade()">Submit</button>
+    <button type="reset">Clear</button>
+  </form>
+  <textarea id="result" readonly></textarea>
+  <p>
+	<a href="hw3.html">Back to Homework 3</a>
+    <a href="hw3_part2.html">Go to Part 2</a>
+  </p>
+
+  <script>
+    function calculateGrade() {
+      const hw = parseInt(document.getElementById("hwAvg").value);
+      const mid = parseInt(document.getElementById("midExam").value);
+      const fin = parseInt(document.getElementById("finalExam").value);
+      const part = parseInt(document.getElementById("participation").value);
+      const resultBox = document.getElementById("result");
+
+      if (
+        isNaN(hw) || isNaN(mid) || isNaN(fin) || isNaN(part) ||
+        hw < 0 || hw > 100 ||
+        mid < 0 || mid > 100 ||
+        fin < 0 || fin > 100 ||
+        part < 0 || part > 100
+      ) {
+        resultBox.value = "Error: All inputs must be integers between 0 and 100.";
+        return;
+      }
+
+      const finalAvg = Math.round((0.5 * hw) + (0.2 * mid) + (0.2 * fin) + (0.1 * part));
+      let grade;
+      if (finalAvg >= 90) grade = "A";
+      else if (finalAvg >= 80) grade = "B";
+      else if (finalAvg >= 70) grade = "C";
+      else if (finalAvg >= 60) grade = "D";
+      else grade = "F";
+
+      let message = "Final Average: " + finalAvg + "\n" +
+                    "Letter Grade: " + grade;
+      if (grade === "D" || grade === "F") {
+        message += "\nStudent must retake the course.";
+      }
+
+      resultBox.value = message;
+    }
+  </script>
+</body>
+</html>
+

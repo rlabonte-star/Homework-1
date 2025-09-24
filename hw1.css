@@ -15,3 +15,17 @@ a {
   background-color: blue;
   font-size: 16px;
 }
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 70%;
+}
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: right;
+}
+th {
+  background-color: white;
+}
+
