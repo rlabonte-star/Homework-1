@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" description="JavaScript course at CSM">
+<title>JavaScript course at CSM</title>
+<link rel="stylesheet" href="hw1.css">
+</head>
+<body>
+  <h1>Homework 4 Part 1</h1>
+  <div id="forResults"></div>
+  <div id="whileResults"></div>
+  <p>
+    <a href="hw4.html">Back to Homework 4</a>
+    <a href="hw4_part2.html">Go to Part 2</a>
+  </p>
+
+  <script>
+    let product1 = 1;
+    let sum1 = 0;
+    let numbers1 = [];
+
+    for (let i = 5; i <= 25; i += 4) {
+      product1 *= i;
+      sum1 += i;
+      numbers1.push(i);
+    }
+
+    const forResults = document.getElementById("forResults");
+    forResults.innerHTML = "<p>The result of " + numbers1.join(" * ") + " is " + product1.toLocaleString() + "</p>";
+    forResults.innerHTML += "<p>The result of " + numbers1.join(" + ") + " is " + sum1.toLocaleString() + "</p>";
+
+    let product2 = 1;
+    let sum2 = 0;
+    let numbers2 = [];
+    let i = 3;
+
+    while (i <= 18) {
+      product2 *= i;
+      sum2 += i;
+      numbers2.push(i);
+      i += 3;
+    }
+
+    const whileResults = document.getElementById("whileResults");
+    whileResults.innerHTML = "<p>The result of " + numbers2.join(" * ") + " is " + product2.toLocaleString() + "</p>";
+    whileResults.innerHTML += "<p>The result of " + numbers2.join(" + ") + " is " + sum2.toLocaleString() + "</p>";
+  </script>
+</body>
+</html>

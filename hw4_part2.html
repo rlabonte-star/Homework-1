@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" description="JavaScript course at CSM">
+<title>JavaScript course at CSM</title>
+<link rel="stylesheet" href="hw1.css">
+<style>
+  table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: green;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background-color: lightgray;
+  }
+  tr:nth-child(odd):not(:first-child) {
+    background-color: white;
+  }
+</style>
+</head>
+<body>
+  <h1>Homework 4 Part 2</h1>
+  <h1>Learn Multiplication</h1>
+  <div id="tables"></div>
+  <p>
+    <a href="hw4.html">Back to Homework 4</a>
+    <a href="hw4_part1.html">Go to Part 1</a>
+  </p>
+
+  <script>
+    const tablesDiv = document.getElementById("tables");
+    let html = "";
+
+    for (let multiplier = 5; multiplier <= 9; multiplier++) {
+      html += "<table>";
+      html += "<tr><th>Number</th><th>Multiplier</th><th>Result</th></tr>";
+      
+      for (let number = 1; number <= 9; number++) {
+        const result = number * multiplier;
+        html += "<tr><td>" + number + "</td><td>" + multiplier + "</td><td>" + result + "</td></tr>";
+      }
+      
+      html += "</table>";
+    }
+
+    tablesDiv.innerHTML = html;
+  </script>
+</body>
+</html>
