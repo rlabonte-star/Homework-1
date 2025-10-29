@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="assignment 5 part 2 working with JavaScript functions in JavaScript course at CSM">
+<title>JavaScript course at CSM</title>
+<link rel="stylesheet" href="hw1.css">
+<style>
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  button {
+    margin: 10px 10px 10px 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #output {
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 600px;
+    min-height: 40px;
+    white-space: pre-line;
+  }
+  .error {
+    color: red;
+    background-color: #ffe6e6;
+    border: 1px solid red;
+  }
+  .success {
+    color: green;
+    background-color: #e6ffe6;
+    border: 1px solid green;
+  }
+</style>
+</head>
+<body>
+  <h1>Homework 5 Part 2</h1>
+  <p><a href="hw5.html">Back to Homework 5</a></p>
+
+  <form id="stateForm">
+    <div class="form-group">
+      <label for="stateInput">Enter State Name or Abbreviation:</label>
+      <input type="text" id="stateInput" name="stateInput" placeholder="e.g., California or CA">
+    </div>
+
+    <button type="button" onclick="getStateInfo()">Get State Info</button>
+    <button type="button" onclick="clearForm()">Clear</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    const stateData = [
+      ["AL", "Alabama", "Montgomery", "5,157,699"],
+      ["AK", "Alaska", "Juneau", "740,133"],
+      ["AZ", "Arizona", "Phoenix", "7,582,384"],
+      ["AR", "Arkansas", "Little Rock", "3,088,354"],
+      ["CA", "California", "Sacramento", "39,431,263"],
+      ["CO", "Colorado", "Denver", "5,957,493"]
+    ];
+
+    function getStateInfo() {
+      const output = document.getElementById("output");
+      const stateInput = document.getElementById("stateInput").value.trim();
+
+      if (stateInput === "") {
+        output.className = "error";
+        output.innerHTML = "Please enter a state name or abbreviation.";
+        return;
+      }
+
+      const inputLower = stateInput.toLowerCase();
+      let foundState = null;
+
+      for (let i = 0; i < stateData.length; i++) {
+        const abbr = stateData[i][0].toLowerCase();
+        const name = stateData[i][1].toLowerCase();
+
+        if (inputLower === abbr || inputLower === name) {
+          foundState = stateData[i];
+          break;
+        }
+      }
+
+      if (foundState) {
+        output.className = "success";
+        output.innerHTML = `Thanks for your inquiry, here is the information you requested:
+State abbr = ${foundState[0]}
+State Name = ${foundState[1]}
+Capital = ${foundState[2]}
+Population = ${foundState[3]}`;
+      } else {
+        output.className = "error";
+        const stateList = stateData.map(state => state[1]).join(", ");
+        output.innerHTML = `Sorry, we do not have information about this state! We only have information about: ${stateList}`;
+      }
+    }
+
+    function clearForm() {
+      document.getElementById("stateForm").reset();
+      document.getElementById("output").innerHTML = "";
+      document.getElementById("output").className = "";
+    }
+  </script>
+</body>
+</html>

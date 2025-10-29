@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="assignment 5 part 1 working with JavaScript functions in JavaScript course at CSM">
+<title>JavaScript course at CSM</title>
+<link rel="stylesheet" href="hw1.css">
+<style>
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .radio-group, .checkbox-group {
+    margin-left: 20px;
+  }
+  .radio-group label, .checkbox-group label {
+    display: inline;
+    font-weight: normal;
+    margin-right: 15px;
+  }
+  select {
+    width: 100%;
+    padding: 8px;
+  }
+  button {
+    margin: 10px 10px 10px 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #output {
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 600px;
+    min-height: 40px;
+  }
+  .error {
+    color: red;
+    background-color: #ffe6e6;
+    border: 1px solid red;
+  }
+  .success {
+    color: green;
+    background-color: #e6ffe6;
+    border: 1px solid green;
+  }
+</style>
+</head>
+<body>
+  <h1>Homework 5 Part 1</h1>
+  <p><a href="hw5.html">Back to Homework 5</a></p>
+
+  <form id="userForm">
+    <div class="form-group">
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName">
+    </div>
+
+    <div class="form-group">
+      <label>Age Group:</label>
+      <div class="radio-group">
+        <input type="radio" id="age1" name="ageGroup" value="less than 21">
+        <label for="age1">Less than 21</label><br>
+        <input type="radio" id="age2" name="ageGroup" value="between 21 and 50">
+        <label for="age2">Between 21 and 50</label><br>
+        <input type="radio" id="age3" name="ageGroup" value="older than 50">
+        <label for="age3">Older than 50</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Browsers Used:</label>
+      <div class="checkbox-group">
+        <input type="checkbox" id="firefox" name="browsers" value="Firefox">
+        <label for="firefox">Firefox</label><br>
+        <input type="checkbox" id="edge" name="browsers" value="Edge">
+        <label for="edge">Edge</label><br>
+        <input type="checkbox" id="chrome" name="browsers" value="Chrome">
+        <label for="chrome">Chrome</label><br>
+        <input type="checkbox" id="safari" name="browsers" value="Safari">
+        <label for="safari">Safari</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="movieType">Preferred Movie Type:</label>
+      <select id="movieType" name="movieType">
+        <option value="">-- Select a movie type --</option>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Documentary">Documentary</option>
+        <option value="Science Fiction">Science Fiction</option>
+      </select>
+    </div>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+    <button type="button" onclick="clearForm()">Clear</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    function submitForm() {
+      const output = document.getElementById("output");
+      const fullName = document.getElementById("fullName").value.trim();
+      const ageGroup = document.querySelector('input[name="ageGroup"]:checked');
+      const browsers = document.querySelectorAll('input[name="browsers"]:checked');
+      const movieType = document.getElementById("movieType").value;
+
+      let errors = [];
+
+      if (fullName === "") {
+        errors.push("Please enter your full name.");
+      }
+
+      if (!ageGroup) {
+        errors.push("Please select an age group.");
+      }
+
+      if (browsers.length === 0) {
+        errors.push("Please select at least one browser.");
+      }
+
+      if (movieType === "") {
+        errors.push("Please select a movie type.");
+      }
+
+      if (errors.length > 0) {
+        output.className = "error";
+        output.innerHTML = "<strong>Error:</strong><br>" + errors.join("<br>");
+      } else {
+        output.className = "success";
+        output.innerHTML = "<strong>Thanks, your data was submitted!</strong>";
+      }
+    }
+
+    function clearForm() {
+      document.getElementById("userForm").reset();
+      document.getElementById("output").innerHTML = "";
+      document.getElementById("output").className = "";
+    }
+  </script>
+</body>
+</html>
