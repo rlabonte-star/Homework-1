@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="assignment 7 style manipulation and cookies in JavaScript course at CSM">
+<title>Homework 7 Part 1</title>
+<link rel="stylesheet" href="hw1.css">
+<style>
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  .form-group { margin-bottom: 15px; }
+  label { display: block; margin-bottom: 5px; font-weight: bold; }
+  .radio-group, .checkbox-group { margin-left: 20px; }
+  .radio-group label, .checkbox-group label { display: inline; font-weight: normal; margin-right: 15px; }
+  
+  #contentArea {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+</style>
+</head>
+<body>
+  <h1>Homework 7 Part 1</h1>
+  <p><a href="hw7.html">Back to Homework 7</a></p>
+
+  <form name="styleForm">
+    <div class="form-group">
+      <label>Background Color:</label>
+      <div class="radio-group">
+        <input type="radio" id="bgRed" name="bgColor" onclick="updateStyles()">
+        <label for="bgRed">Light Red</label>
+        
+        <input type="radio" id="bgBlue" name="bgColor" onclick="updateStyles()">
+        <label for="bgBlue">Light Blue</label>
+        
+        <input type="radio" id="bgYellow" name="bgColor" onclick="updateStyles()">
+        <label for="bgYellow">Light Yellow</label>
+        
+        <input type="radio" id="bgWhite" name="bgColor" onclick="updateStyles()" checked>
+        <label for="bgWhite">White (Default)</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Text Decoration:</label>
+      <div class="checkbox-group">
+        <input type="checkbox" id="styleBold" onclick="updateStyles()">
+        <label for="styleBold">Bold</label>
+        
+        <input type="checkbox" id="styleItalic" onclick="updateStyles()">
+        <label for="styleItalic">Italic</label>
+        
+        <input type="checkbox" id="styleUnderline" onclick="updateStyles()">
+        <label for="styleUnderline">Underline</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fontSizeSelect">Font Size:</label>
+      <select id="fontSizeSelect" onchange="updateStyles()">
+        <option value="1rem">Standard (1rem)</option>
+        <option value="1.2rem">Medium (1.2rem)</option>
+        <option value="1.5rem">Large (1.5rem)</option>
+        <option value="80%">Small (80%)</option>
+      </select>
+    </div>
+  </form>
+
+  <div id="contentArea">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+  </div>
+
+  <script>
+    function updateStyles() {
+      const target = document.getElementById("contentArea");
+      if (document.getElementById("bgRed").checked) {
+        target.style.backgroundColor = "#ffe6e6";
+      } else if (document.getElementById("bgBlue").checked) {
+        target.style.backgroundColor = "#e6f2ff";
+      } else if (document.getElementById("bgYellow").checked) {
+        target.style.backgroundColor = "#ffffe0";
+      } else {
+        target.style.backgroundColor = "#ffffff";
+      }
+      if (document.getElementById("styleBold").checked) {
+        target.style.fontWeight = "bold";
+      } else {
+        target.style.fontWeight = "normal";
+      }
+      if (document.getElementById("styleItalic").checked) {
+        target.style.fontStyle = "italic";
+      } else {
+        target.style.fontStyle = "normal";
+      }
+      if (document.getElementById("styleUnderline").checked) {
+        target.style.textDecoration = "underline";
+      } else {
+        target.style.textDecoration = "none";
+      }
+      target.style.fontSize = document.getElementById("fontSizeSelect").value;
+    }
+  </script>
+</body>
+</html>
